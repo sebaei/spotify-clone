@@ -7,7 +7,7 @@ const Discover = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetTopChartsQuery();
-  console.log(data?.tracks);
+  const newData = data?.tracks;
   const genreTitle = "Pop";
 
   if (isFetching) return <Loader title="Loading Songs ..." />;
@@ -33,14 +33,14 @@ const Discover = () => {
         </select>
       </div>
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {data?.tracks.map((song, i) => (
+        {newData?.map((song, i) => (
           <SongCard
             key={song.key}
             song={song}
             i={i}
             isPlaying={isPlaying}
             activeSong={activeSong}
-            data={data}
+            data={newData}
           />
         ))}
       </div>
